@@ -65,9 +65,8 @@ $user=User::where('email', $request->email)->first();
      *@return User
      */
     public function logoutUser(Request $request){
-    auth()->user()->tokens->each(function($token,$key) {
-     $token->delete;
-    });
+        $user = $request->user();
+        $user->tokens()->delete();
 
       return response()->noContent();
     }
